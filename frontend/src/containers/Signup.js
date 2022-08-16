@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Auth, UsernameExistsException } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import Form from "react-bootstrap/Form";
 import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../lib/contextLib";
