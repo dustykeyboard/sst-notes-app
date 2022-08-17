@@ -92,6 +92,11 @@ export default function Notes() {
     }
   }
 
+  async function deleteNote() {
+    await s3Remove(note.attachment);
+    return API.del("notes", `/notes/${id}`);
+  }
+
   async function handleDelete(event) {
     event.preventDefault();
 
@@ -104,6 +109,13 @@ export default function Notes() {
     }
 
     setIsDeleting(true);
+    try {
+      await deleteNote();
+      nav("/");
+    } catch (e) {
+      onError(e);
+      setIsDeleting(false);
+    }
   }
 
   return (
