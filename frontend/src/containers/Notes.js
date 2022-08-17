@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { API, Storage } from "aws-amplify";
 import Form from "react-bootstrap/Form";
-import { s3Upload } from "../lib/awsLib";
+import { s3Upload, s3Remove } from "../lib/awsLib";
 import { onError } from "../lib/errorLib";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
@@ -77,6 +77,7 @@ export default function Notes() {
 
     try {
       if (file.current) {
+        if (note.attachment) await s3Remove(note.attachment);
         attachment = await s3Upload(file.current);
       }
 
